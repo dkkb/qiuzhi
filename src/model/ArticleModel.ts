@@ -3,6 +3,7 @@ import {ArticleReadStatus} from "../constants/constants.ts";
 export interface ArticleModel {
     uuid: string
     title: string
+    image: string
     author: string
     description: string
     create_date: string

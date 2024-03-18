@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useLayoutEffect, useRef, useState} from "react";
 import {motion} from "framer-motion";
 import {ArticleItem} from "../ArticleItem";
 import {CheckCheck, Filter, RefreshCw, Snail} from "lucide-react";
@@ -64,8 +64,21 @@ export const ArticleList = () => {
             // });
         }
     };
+
+    // Calculate the number of placeholder items to render based on the container height and the placeholder height.
+    const [placeholderCount, setPlaceholderCount] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+    useLayoutEffect(() => {
+        const container = containerRef.current;
+        if (container) {
+            const containerHeight = container.getBoundingClientRect().height;
+            const placeholderHeight = 100;
+            const count = Math.floor(containerHeight / placeholderHeight);
+            setPlaceholderCount(count);
+        }
+    }, []);
     return (
-        <div className={"w-1/6 max-w-[300px] shadow"}>
+        <div className={"w-1/5 max-w-[300px] min-w-[240px] shadow"} ref={containerRef}>
             <div
                 className="h-[var(--app-toolbar-height)] grid grid-cols-[auto_1fr] items-center justify-between border-b">
                 <div
@@ -109,16 +122,13 @@ export const ArticleList = () => {
                 </div>
             </div>
             <div>
-                {isEmpty ? (
-                    <div
-                        className="absolute top-1/2 -translate-y-1/2 w-full flex flex-col justify-center items-center gap-1 text-muted-foreground">
-                        <Snail size={34} strokeWidth={1}/>
-                        <p>Yay, no matching items.</p>
-                    </div>
-                ) : null}
                 <ul className="m-0 grid gap-2 pt-2 pr-1 pb-1 pl-2">{renderList()}</ul>
                 <div className="pt-1">
-                    {isLoading && (<ArticleListItemPlaceholder/>)}
+                    {isLoading && (
+                        Array.from({length: placeholderCount}).map((_, index) => (
+                            <ArticleListItemPlaceholder key={index}/>
+                        ))
+                    )}
                 </div>
             </div>
         </div>
