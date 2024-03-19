@@ -25,13 +25,6 @@ export const ArticleContainer = () => {
             </div>
         )
     }
-    const renderPlaceholder = () => {
-        return (
-            <div className="py-10 text-xl">
-                <p>Let's read something</p>
-            </div>
-        );
-    };
 
     const scrollBoxRef = useRef<ScrollBoxRefObject>(null);
 
@@ -64,7 +57,7 @@ export const ArticleContainer = () => {
                             <div
                                 className="font-[var(--reading-font-body)] min-h-full m-auto sm:px-5 sm:max-w-xl lg:px-10 lg:max-w-5xl">
                                 {" "}
-                                {store.article ? <ArticleDetail/> : renderPlaceholder()}
+                                <ArticleDetail/>
                             </div>
                         </ScrollBox>
                     </motion.article>
