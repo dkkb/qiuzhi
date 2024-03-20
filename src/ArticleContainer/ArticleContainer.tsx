@@ -8,6 +8,8 @@ import {ScrollBox, ScrollBoxRefObject} from "../Components/ScrollBox.tsx";
 import {useRef} from "react";
 import {Separator} from "../Components/separator.tsx";
 import {ReadingOptions} from "./ReadingOptions.tsx";
+import {ArticleModel} from "../model/ArticleModel.ts";
+import {ArticleReadStatus} from "../constants/constants.ts";
 
 export const ArticleContainer = () => {
     const isEmpty = false;
@@ -15,7 +17,17 @@ export const ArticleContainer = () => {
         feed: state.feed,
         article: state.article,
     }));
-
+    const article: ArticleModel = {
+        uuid: '',
+        title: "Title",
+        feed_title: "feed_title",
+        image: "image",
+        description: "description",
+        create_date: 'create_date',
+        author: 'Author',
+        read_status: ArticleReadStatus.UNREAD,
+        feed_url: 'feed_url'
+    }
     const emptyPlaceholder = () => {
         return (
             <div
@@ -57,7 +69,7 @@ export const ArticleContainer = () => {
                             <div
                                 className="font-[var(--reading-font-body)] min-h-full m-auto sm:px-5 sm:max-w-xl lg:px-10 lg:max-w-5xl">
                                 {" "}
-                                <ArticleDetail/>
+                                <ArticleDetail article={article}/>
                             </div>
                         </ScrollBox>
                     </motion.article>

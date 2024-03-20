@@ -1,7 +1,7 @@
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {motion} from "framer-motion";
 import {ArticleItem} from "../ArticleItem";
-import {CheckCheck, Filter, RefreshCw, Snail} from "lucide-react";
+import {CheckCheck, Filter, RefreshCw} from "lucide-react";
 import {ArticleModel} from "../../model/ArticleModel.ts";
 import {TooltipBox} from "../../Components/tooltip.tsx";
 import {Icon} from "../../Components/icon.tsx";

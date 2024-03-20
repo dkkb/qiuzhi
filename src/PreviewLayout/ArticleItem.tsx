@@ -3,6 +3,7 @@ import {formatDistanceToNow, parseISO} from "date-fns";
 import classnames from "classnames";
 import {ArticleModel} from "../model/ArticleModel.ts";
 import {ArticleReadStatus} from "../constants/constants.ts";
+import {getFeedFavicon} from "../helpers/favicon.ts";
 
 interface ArticleItemProps {
     article: ArticleModel;

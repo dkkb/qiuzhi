@@ -1,4 +1,4 @@
-export const getChannelFavicon = (url: string) => {
+export const getFeedFavicon = (url: string) => {
     try {
         const hostname = url ? new URL(url).hostname : "";
 

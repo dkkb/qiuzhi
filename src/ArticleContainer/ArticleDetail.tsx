@@ -1,30 +1,17 @@
-import {Separator} from "../Components/separator.tsx";
 import {ArticleModel} from "../model/ArticleModel.ts";
-import {ArticleReadStatus} from "../constants/constants.ts";
-import {getChannelFavicon} from "../helpers/favicon.ts";
+import {getFeedFavicon} from "../helpers/favicon.ts";
 import "dayjs";
 import dayjs from "dayjs";
 import {Skeleton} from "../Components/skeleton.tsx";
 
 interface ArticleDetailProps {
-    article: any;
+    article: ArticleModel;
 }
 
-export const ArticleDetail = () => {
-    const article: ArticleModel = {
-        uuid: '',
-        title: "Title",
-        feed_title: "feed_title",
-        image: "image",
-        description: "description",
-        create_date: 'create_date',
-        author: 'Author',
-        read_status: ArticleReadStatus.UNREAD,
-        feed_url: 'feed_url'
-    }
+export const ArticleDetail = ({article}: ArticleDetailProps) => {
     // Mock html content
     const pageContent = "<h1>pageContent</h1>"
-    const ico = getChannelFavicon('https://www.zhihu.com/rss');
+    const ico = getFeedFavicon('https://www.zhihu.com/rss');
     const renderItem = (item: string) => {
         return (
             <span className="self-center h-20 leading-20 text-detail-paragraph">{item}</span>
@@ -106,18 +93,8 @@ export const ArticleDetail = () => {
         )
     }
     return (
-        <>
-            <div className="sticky left-0 right-0 top-0 z-[3]">
-                <div
-                    className="flex items-center justify-end px-20 py-2 space-x-0.5 rounded-tl-lg rounded-tr-lg bg-background border-b">
-                    <span>
-                        <Separator orientation="vertical" className="h-4 mx-2"/>
-                    </span>
-                </div>
-            </div>
-            <div className="relative px-20 py-10">
-                {article.uuid ? renderDetail() : renderPlaceholder()}
-            </div>
-        </>
+        <div className="relative px-20 py-10">
+            {article.uuid ? renderDetail() : renderPlaceholder()}
+        </div>
     )
 }
