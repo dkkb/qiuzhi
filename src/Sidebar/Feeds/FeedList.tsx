@@ -21,7 +21,7 @@ export const FeedList = ({subscribeData}: { subscribeData: SubscribeItemModel[] 
                     text={feed.title}
                     level={level}
                     feed={{...feed}}
-                    isActive={true}
+                    isActive={false}
                     toggleFolder={() => {}}
                     onDrop={() => {}}
                 >

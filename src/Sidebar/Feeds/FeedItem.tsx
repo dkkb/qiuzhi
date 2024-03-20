@@ -140,7 +140,7 @@ export const SubscribeItem: FC<CardProps> = memo(
                     text={feed.title}
                     feed={{...feed}}
                     isActive={isActive}
-                    isExpanded={feed.type == SubscribeItemType.FOLDER || false}
+                    isExpanded={feed.type === SubscribeItemType.FOLDER || false}
                     toggleFolder={toggleFolder}
                 >
                     {props.children && (
@@ -148,7 +148,7 @@ export const SubscribeItem: FC<CardProps> = memo(
                             className={clsx(
                                 "grid grid-rows-[0fr] grid-cols-[100%] overflow-hidden transition-all",
                                 {
-                                    "grid-rows-[1fr]": isExpanded,
+                                    "grid-rows-[1fr]": feed.type === SubscribeItemType.FOLDER,
                                 },
                             )}
                         >

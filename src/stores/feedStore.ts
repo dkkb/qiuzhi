@@ -1,6 +1,6 @@
 import {StateCreator} from "zustand";
 import {FeedItem} from "../model/Feed.ts";
-import {SubscribeItem} from "../model/SubscribeItem.ts";
+import {SubscribeItem, SubscribeItemType} from "../model/SubscribeItem.ts";
 import {Folder} from "../model/Folder.ts";
 
 export interface FeedStore {
@@ -24,18 +24,21 @@ export const useFeedStore: StateCreator<FeedStore> = (set, get) => ({
             data: [
                 {title: 'IT桔子', feed_url: 'https://www.itjuzi.com/api/telegraph.xml'},
                 {
+                    type: SubscribeItemType.FOLDER,
                     folder_name: 'Read',
                     children: [
                         {title: '少数派', feed_url: 'https://sspai.com/feed'},
                     ]
                 } as Folder,
                 {
+                    type: SubscribeItemType.FOLDER,
                     folder_name: 'Product',
                     children: [
                         {title: '人人都是产品经理', feed_url: 'https://www.woshipm.com/feed'},
                     ]
                 } as Folder,
                 {
+                    type: SubscribeItemType.FOLDER,
                     folder_name: 'News',
                     children: [
                         {title: 'Readhub', feed_url: 'https://rsshub.app/readhub'},
@@ -53,6 +56,7 @@ export const useFeedStore: StateCreator<FeedStore> = (set, get) => ({
                     ]
                 } as Folder,
                 {
+                    type: SubscribeItemType.FOLDER,
                     folder_name: 'Tech blog',
                     children: [
                         {title: 'InfoQ CN', feed_url: 'https://www.infoq.com/cn/feed'},
@@ -70,6 +74,7 @@ export const useFeedStore: StateCreator<FeedStore> = (set, get) => ({
                     ]
                 } as Folder,
                 {
+                    type: SubscribeItemType.FOLDER,
                     folder_name: 'Invest',
                     children: [
                         {title: '商业深度-投中网', feed_url: 'https://rsshub.app/chinaventure/news/78'},
@@ -82,6 +87,7 @@ export const useFeedStore: StateCreator<FeedStore> = (set, get) => ({
                     ]
                 } as Folder,
                 {
+                    type: SubscribeItemType.FOLDER,
                     folder_name: "AI",
                     children: [
                         {title: 'Google AI Blog', feed_url: 'https://googleaiblog.blogspot.com/atom.xml'},
