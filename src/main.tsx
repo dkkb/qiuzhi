@@ -5,7 +5,7 @@ import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import {RouteConfig} from "./RootConfig.ts";
 import ErrorPage from "./ErrorPage.tsx";
 import {Toaster} from "sonner";
-import {Sidebar} from "./Sidebar/Sidebar.tsx";
+import {NavSidebar} from "./Sidebar/NavSidebar.tsx";
 
 import "./index.css";
 import {ArticleContainer} from "./ArticleContainer/ArticleContainer.tsx";
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path: RouteConfig.LOCAL,
-                element: <Sidebar/>,
+                element: <NavSidebar/>,
                 children: [
                     {
                         path: RouteConfig.LOCAL_TODAY,

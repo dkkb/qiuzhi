@@ -30,7 +30,7 @@ export const ArticleItem = ({article}: ArticleItemProps) => {
     }, [article.read_status]);
 
     useEffect(() => {
-        setHighlight(store.article?.id === article.uuid);
+        setHighlight(store.article?.uuid === article.uuid);
     }, [store.article, article]);
 
     return (

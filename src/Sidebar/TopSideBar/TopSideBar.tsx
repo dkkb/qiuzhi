@@ -1,28 +1,22 @@
 import {TooltipBox} from "../../Components/tooltip.tsx";
 import {Icon} from "../../Components/icon.tsx";
 import {FolderPlus, RefreshCw} from "lucide-react";
-import {useRefreshFeed} from "../../hooks/useRefreshFeed.ts";
 import {NewSubscribe} from "./NewSubscribe.tsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 interface TopSideBarProps {
-    lastUpdatedAt: string
+    lastUpdatedAt: string,
+    startRefreshFeed: () => void,
+    refreshing: boolean,
 }
 
-export const TopSideBar = ({lastUpdatedAt}: TopSideBarProps) => {
+export const TopSideBar = ({lastUpdatedAt, startRefreshFeed, refreshing}: TopSideBarProps) => {
     const [showNewSubscribe, setShowNewSubscribe] = useState(false);
-    const [getFeedList, refreshing, startRefreshFeed] = useRefreshFeed();
 
-    useEffect(() => {
-        console.info("init TopSideBar, fetch feed")
-        getFeedList();
-    }, []);
-
-    const mockTime = '2024-04-01 00:00:00';
     return (
         <div className="flex h-[var(--app-toolbar-height)] items-center justify-end bg-[var(--background)] px-2 py-0">
             <div className="flex justify-start">
-                <span className="text-sm text-gray-500 item-center">Last updated at {mockTime}</span>
+                <span className="text-sm text-gray-500 item-center">Last updated at {lastUpdatedAt}</span>
             </div>
             <div className="flex justify-end">
                 <NewSubscribe

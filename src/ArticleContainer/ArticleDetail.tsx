@@ -93,7 +93,7 @@ export const ArticleDetail = ({article}: ArticleDetailProps) => {
         )
     }
     return (
-        <div className="relative px-20 py-10">
+        <div className="relative px-20 py-6">
             {article.uuid ? renderDetail() : renderPlaceholder()}
         </div>
     )
