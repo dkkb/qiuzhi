@@ -54,7 +54,7 @@ export const ItemView: FC<CardProps> = ({uuid, text, feed, index, isExpanded, to
                         store.feedContextMenuStatus &&
                         store.feedContextMenuTarget &&
                         store.feedContextMenuTarget.uuid === feed.uuid,
-                    "pl-7": level === 2,
+                    "pl-11": level === 2,
                 })}
                 onContextMenu={() => {
                     store.setFeedContextMenuTarget(feed);

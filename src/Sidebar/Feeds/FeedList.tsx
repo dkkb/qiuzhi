@@ -37,9 +37,9 @@ export const FeedList = ({subscribeData}: { subscribeData: SubscribeItemModel[] 
     return (
         <>
             <div
-                className={clsx("height-[calc(100% - var(--app-toolbar-height))] flex-1 overflow-y-auto pb-2 pl-2 pr-1")}>
-                <h2 className="mb-2 mt-6 px-4 text-lg font-semibold tracking-tight">Collections</h2>
-                <h2 className="mb-2 mt-6 px-4 text-lg font-semibold tracking-tight">Feeds</h2>
+                className={clsx("height-[calc(100% - var(--app-toolbar-height))] flex-1 overflow-y-auto pb-2 pr-1")}>
+                <h2 className="mb-2 mt-4 px-6 text-lg font-semibold tracking-tight">Collections</h2>
+                <h2 className="mb-2 mt-4 px-6 text-lg font-semibold tracking-tight">Feeds</h2>
                 <ContextMenu onOpenChange={handleContextMenuChange}>
                     <ContextMenuTrigger>
                         <DndProvider backend={HTML5Backend}>

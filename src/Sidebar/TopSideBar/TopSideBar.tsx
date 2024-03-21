@@ -14,9 +14,11 @@ export const TopSideBar = ({lastUpdatedAt, startRefreshFeed, refreshing}: TopSid
     const [showNewSubscribe, setShowNewSubscribe] = useState(false);
 
     return (
-        <div className="flex h-[var(--app-toolbar-height)] items-center justify-end bg-[var(--background)] px-2 py-0">
-            <div className="flex justify-start">
-                <span className="text-sm text-gray-500 item-center">Last updated at {lastUpdatedAt}</span>
+        <div
+            className="flex justify-between items-center px-4 pt-2 h-[var(--app-toolbar-height)] bg-[var(--background)]">
+            <div className="flex flex-col justify-start">
+                <div className="text-sm text-gray-500 mb-1 px-2">Last updated</div>
+                <div className="text-sm text-gray-500 px-2">{lastUpdatedAt}</div>
             </div>
             <div className="flex justify-end">
                 <NewSubscribe
