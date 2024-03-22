@@ -17,14 +17,10 @@ export type ArticleListProps = {
     feedUuid?: string;
     type?: string;
     title: string | null;
-    size: any;
-    setSize: any;
-    isReachingEnd?: boolean;
-    isEmpty: boolean;
     isLoading: boolean;
 };
 
-export const ArticleList = () => {
+export const ArticleList = ({isLoading}: ArticleListProps) => {
     const filterList = [
         {id: 0, title: "All",},
         {id: 1, title: "Unread",},
@@ -33,8 +29,6 @@ export const ArticleList = () => {
     // const {articles, isLoading, size, mutate, setSize, isEmpty, isReachingEnd, isToday, isAll, isStarred} =
     //     useArticle({feedUuid, type,});
     const articles: ArticleModel[] = [];
-    const isLoading = true;
-    const isEmpty = true;
     const isStarred = true;
 
     const renderList = (): React.JSX.Element[] => {

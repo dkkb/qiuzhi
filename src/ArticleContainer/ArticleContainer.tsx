@@ -10,13 +10,15 @@ import {Separator} from "../Components/separator.tsx";
 import {ReadingOptions} from "./ReadingOptions.tsx";
 import {ArticleModel} from "../model/ArticleModel.ts";
 import {ArticleReadStatus} from "../constants/constants.ts";
+import {useArticle} from "../hooks/useArticle.ts";
 
 export const ArticleContainer = () => {
-    const isEmpty = false;
     const store = useBearStore((state) => ({
         feed: state.feed,
         article: state.article,
     }));
+    const {articles, isLoading, size, mutate, setSize, isEmpty, isReachingEnd, isToday, isAll, isStarred} =
+        useArticle({feedUuid, type,});
     const article: ArticleModel = {
         uuid: '',
         title: "Title",
@@ -81,7 +83,7 @@ export const ArticleContainer = () => {
     return (
         <div className={clsx("relative grid h-[100vh] flex-1 pl-0", {})}>
             <div className="bg-panel flex h-full flex-1 overflow-hidden rounded-md">
-                <ArticleList/>
+                <ArticleList isLoading={isLoading} title={title}/>
                 {isEmpty ? emptyPlaceholder() : a()}
             </div>
         </div>
