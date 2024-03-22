@@ -5,8 +5,9 @@ export enum SubscribeItemType {
 }
 
 export interface SubscribeItem {
+    id: string;
     title: string;
-    uuid?: string;
+    url: string;
     logo?: string;
     description?: string;
     unread?: number;
