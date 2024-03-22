@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {motion} from "framer-motion";
-import {ArticleItem} from "../ArticleItem";
+import {ArticleListItem} from "../ArticleListItem.tsx";
 import {CheckCheck, Filter, RefreshCw} from "lucide-react";
 import {ArticleModel} from "../../model/ArticleModel.ts";
 import {TooltipBox} from "../../Components/tooltip.tsx";
@@ -14,22 +14,18 @@ import {
 import {ArticleListItemPlaceholder} from "../../Components/ArticleListItemPlaceholder.tsx";
 
 export type ArticleListProps = {
-    feedUuid?: string;
-    type?: string;
-    title: string | null;
+    // feedUuid?: string;
+    // type?: string;
     isLoading: boolean;
+    articles: ArticleModel[];
 };
 
-export const ArticleList = ({isLoading}: ArticleListProps) => {
+export const ArticleList = ({isLoading, articles}: ArticleListProps) => {
     const filterList = [
         {id: 0, title: "All",},
         {id: 1, title: "Unread",},
         {id: 2, title: "Read",},
     ];
-    // const {articles, isLoading, size, mutate, setSize, isEmpty, isReachingEnd, isToday, isAll, isStarred} =
-    //     useArticle({feedUuid, type,});
-    const articles: ArticleModel[] = [];
-    const isStarred = true;
 
     const renderList = (): React.JSX.Element[] => {
         return (articles || []).map((article: ArticleModel, idx: number) => {
@@ -40,7 +36,7 @@ export const ArticleList = ({isLoading}: ArticleListProps) => {
                     initial={{opacity: 0, y: 30}}
                     key={article.title + idx}
                 >
-                    <ArticleItem article={article}/>
+                    <ArticleListItem article={article}/>
                 </motion.div>
             );
         });
@@ -106,13 +102,11 @@ export const ArticleList = ({isLoading}: ArticleListProps) => {
                             <CheckCheck size={16}/>
                         </Icon>
                     </TooltipBox>
-                    {!!!isStarred && (
-                        <TooltipBox content="Reload feed">
-                            <Icon onClick={handleRefresh}>
-                                <RefreshCw size={16} className={`${true ? "spinning" : "333"}`}/>
-                            </Icon>
-                        </TooltipBox>
-                    )}
+                    <TooltipBox content="Reload feed">
+                        <Icon onClick={handleRefresh}>
+                            <RefreshCw size={16} className={`${true ? "spinning" : "333"}`}/>
+                        </Icon>
+                    </TooltipBox>
                 </div>
             </div>
             <div>

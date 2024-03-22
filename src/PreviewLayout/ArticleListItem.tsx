@@ -1,17 +1,25 @@
 import React, {useEffect, useState} from "react";
-import {formatDistanceToNow, parseISO} from "date-fns";
+import {formatDistanceToNow} from "date-fns";
 import classnames from "classnames";
 import {ArticleModel} from "../model/ArticleModel.ts";
 import {ArticleReadStatus} from "../constants/constants.ts";
 import {getFeedFavicon} from "../helpers/favicon.ts";
+import {useBearStore} from "../stores";
 
 interface ArticleItemProps {
     article: ArticleModel;
 }
 
-export const ArticleItem = ({article}: ArticleItemProps) => {
+export const ArticleListItem = ({article}: ArticleItemProps) => {
     const [highlight, setHighlight] = useState(false);
     const [readStatus, setReadStatus] = useState(article.read_status);
+    const store = useBearStore((state) => ({
+        feed: state.feed,
+        article: state.article,
+
+        markArticleAsRead: state.markArticleAsRead,
+        setArticle: state.setArticle,
+    }));
 
     const updateCurrentArticle = (article: any) => {
         if (article.read_status === ArticleReadStatus.UNREAD) {
@@ -23,15 +31,13 @@ export const ArticleItem = ({article}: ArticleItemProps) => {
         updateCurrentArticle(article);
     };
 
-    const ico = getFeedFavicon(article.feed_url);
+    // useEffect(() => {
+    //     setReadStatus(article.read_status);
+    // }, [article.read_status]);
 
-    useEffect(() => {
-        setReadStatus(article.read_status);
-    }, [article.read_status]);
-
-    useEffect(() => {
-        setHighlight(store.article?.uuid === article.uuid);
-    }, [store.article, article]);
+    // useEffect(() => {
+    //     setHighlight(store.article?.id === article.id);
+    // }, [store.article, article]);
 
     return (
         <li
@@ -44,18 +50,14 @@ export const ArticleItem = ({article}: ArticleItemProps) => {
                 }
             )}
             onClick={handleClick}
-            id={article.uuid}
+            id={article.id}
         >
             {readStatus === ArticleReadStatus.UNREAD && (
                 <div className="absolute left-2 top-4 w-2 h-2 rounded-full bg-primary"/>
             )}
             <div
                 className={classnames(
-                    `${
-                        highlight
-                            ? "text-article-active-headline"
-                            : "text-article-headline"
-                    }`,
+                    `${highlight ? "text-article-active-headline" : "text-article-headline"}`,
                     "font-bold text-sm group-hover:text-article-active-headline break-all"
                 )}
             >
@@ -82,7 +84,7 @@ export const ArticleItem = ({article}: ArticleItemProps) => {
             >
                 <div className="flex items-center">
                     <img
-                        src={store.feed?.logo || ico}
+                        src={store.feed?.logo || getFeedFavicon(article.source_url)}
                         alt=""
                         className="rounded w-4 mr-1"
                     />
@@ -91,10 +93,7 @@ export const ArticleItem = ({article}: ArticleItemProps) => {
             </span>
                 </div>
                 <div className="whitespace-nowrap">
-                    {formatDistanceToNow(parseISO(article.create_date), {
-                        includeSeconds: true,
-                        addSuffix: true,
-                    })}
+                    {formatDistanceToNow(article.publish_date, {includeSeconds: true, addSuffix: true,})}
                 </div>
             </div>
         </li>

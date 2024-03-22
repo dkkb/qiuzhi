@@ -1,11 +1,13 @@
 import pino, {Logger} from 'pino';
 
+const env = import.meta.env;
+
 export class PinoLogger {
     private readonly logger: Logger;
 
     constructor() {
         this.logger = pino({
-                level: process.env.LOG_LEVEL || 'info',
+                level: env.LOG_LEVEL || 'info',
             },
         );
     }

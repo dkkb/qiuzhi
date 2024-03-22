@@ -43,8 +43,8 @@ export const ItemView: FC<CardProps> = ({uuid, text, feed, index, isExpanded, to
         // }
     };
 
-    const {unread = 0, feed_url, logo} = feed;
-    const ico = logo || getFeedFavicon(feed_url);
+    const {unread = 0, url, logo} = feed;
+    const ico = logo || getFeedFavicon(url);
 
     return (
         <>
@@ -63,7 +63,7 @@ export const ItemView: FC<CardProps> = ({uuid, text, feed, index, isExpanded, to
                 key={feed.title}
                 onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                     e.stopPropagation();
-                    store.setFeed(feed);
+                    // store.setFeed(feed);
                     navigate(
                         `${RouteConfig.LOCAL_FEED.replace(/:feedId/, feed.id)}?url=${feed.url}&type=${feed.type}`
                     );
