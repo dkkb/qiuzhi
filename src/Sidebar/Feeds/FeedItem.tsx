@@ -54,7 +54,7 @@ export const SubscribeItem: FC<CardProps> = memo(
                 if (monitor.didDrop()) {
                     return;
                 }
-                if (item.uuid === feed.uuid) {
+                if (item.id === feed.uuid) {
                     return;
                 }
                 props.onDrop(item, feed, insertTileIndicator);
@@ -70,10 +70,10 @@ export const SubscribeItem: FC<CardProps> = memo(
                 if (!ref.current) {
                     return;
                 }
-                if (item.uuid === feed.uuid) {
+                if (item.id === feed.uuid) {
                     return;
                 }
-                if (item.uuid === feed.folder_uuid) {
+                if (item.id === feed.folder_uuid) {
                     return;
                 }
                 const hoverBoundingRect = ref.current?.getBoundingClientRect();

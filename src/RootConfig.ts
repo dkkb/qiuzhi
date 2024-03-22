@@ -9,8 +9,8 @@ export enum RouteConfig {
   LOCAL_ALL = "/local/all",
   LOCAL_STARRED = "/local/starred",
   LOCAL_TODAY = "/local/today",
-  LOCAL_FEED = "/local/feeds/:uuid",
-  LOCAL_ARTICLE = "/local/feeds/:uuid/articles/:id",
+  LOCAL_FEED = "/local/feeds/:feedId",
+  LOCAL_ARTICLE = "/local/feeds/:feedId/articles/:articleId",
 
   SERVICE_FRESHRSS = "/service/freshrss",
 

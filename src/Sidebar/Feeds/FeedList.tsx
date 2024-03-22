@@ -1,13 +1,22 @@
 import {clsx} from "clsx";
-import {ContextMenu, ContextMenuTrigger} from "../../Components/context-menu.tsx";
+import {
+    ContextMenu,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuSeparator,
+    ContextMenuTrigger
+} from "../../Components/context-menu.tsx";
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {SubscribeItem} from "./FeedItem.tsx";
 import {SubscribeItem as SubscribeItemModel, SubscribeItemType} from "../../model/SubscribeItem.ts";
 import {Folder} from "../../model/Folder.ts";
+import {CheckCheck} from "lucide-react";
 
 export const FeedList = ({subscribeData}: { subscribeData: SubscribeItemModel[] }) => {
     const handleContextMenuChange = (status: boolean) => {
+    }
+    const markAllRead = () => {
     };
 
     const renderList = () => {
@@ -15,15 +24,17 @@ export const FeedList = ({subscribeData}: { subscribeData: SubscribeItemModel[] 
             // const isActive = store?.feed?.uuid === feed.uuid;
             return (
                 <SubscribeItem
-                    key={feed.uuid}
+                    key={feed.id}
                     index={index}
-                    uuid={feed.uuid}
+                    uuid={feed.id}
                     text={feed.title}
                     level={level}
                     feed={{...feed}}
                     isActive={false}
-                    toggleFolder={() => {}}
-                    onDrop={() => {}}
+                    toggleFolder={() => {
+                    }}
+                    onDrop={() => {
+                    }}
                 >
                     {feed.type === SubscribeItemType.FOLDER && (feed as Folder).children.map((child, idx) => {
                         return renderFeed(child, idx, 2);
@@ -46,6 +57,12 @@ export const FeedList = ({subscribeData}: { subscribeData: SubscribeItemModel[] 
                             <div className="">{renderList()}</div>
                         </DndProvider>
                     </ContextMenuTrigger>
+                    <ContextMenuContent key={"0"}>
+                        <ContextMenuItem onClick={markAllRead}>
+                            <CheckCheck size={14} className="mr-2"/> Mark all as read
+                        </ContextMenuItem>
+                        <ContextMenuSeparator/>
+                    </ContextMenuContent>
                 </ContextMenu>
             </div>
         </>

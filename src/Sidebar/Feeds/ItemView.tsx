@@ -6,6 +6,7 @@ import {useBearStore} from "../../stores";
 import {SubscribeItem as SubscribeItemModel, SubscribeItemType} from "../../model/SubscribeItem.ts";
 import {FolderIcon, FolderMinusIcon, FolderOpenIcon} from "lucide-react";
 import {Folder} from "../../model/Folder.ts";
+import {RouteConfig} from "../../RootConfig.ts";
 
 export interface CardProps {
     uuid: any;
@@ -53,7 +54,7 @@ export const ItemView: FC<CardProps> = ({uuid, text, feed, index, isExpanded, to
                     "shadow-[inset_0_0_0_2px_var(--color-primary)]":
                         store.feedContextMenuStatus &&
                         store.feedContextMenuTarget &&
-                        store.feedContextMenuTarget.uuid === feed.uuid,
+                        store.feedContextMenuTarget.uuid === feed.id,
                     "pl-11": level === 2,
                 })}
                 onContextMenu={() => {
@@ -63,11 +64,9 @@ export const ItemView: FC<CardProps> = ({uuid, text, feed, index, isExpanded, to
                 onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                     e.stopPropagation();
                     store.setFeed(feed);
-                    // navigate(
-                    //     `${ RouteConfig.LOCAL_FEED.replace(/:uuid/, feed.uuid) }?feedUuid=${ feed.uuid }&feedUrl=${
-                    //         feed.feed_url
-                    //     }&type=${ feed.item_type }`
-                    // );
+                    navigate(
+                        `${RouteConfig.LOCAL_FEED.replace(/:feedId/, feed.id)}?feedUrl=${feed.feed_url}`
+                    );
                 }}
             >
                 {feed.type === SubscribeItemType.FOLDER ?

@@ -2,8 +2,6 @@ import {SubscribeItem, SubscribeItemType} from "./SubscribeItem.ts";
 
 export interface FeedItem extends SubscribeItem {
     item_type?: string;
-    uuid?: string;
-    feed_url: string;
     logo?: string;
     description?: string;
     pub_date?: Date;
