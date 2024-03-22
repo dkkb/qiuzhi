@@ -1,6 +1,6 @@
 import React, {useLayoutEffect, useRef, useState} from "react";
 import {motion} from "framer-motion";
-import {ArticleListItem} from "../ArticleListItem.tsx";
+import {ArticleListItem} from "./ArticleListItem.tsx";
 import {CheckCheck, Filter, RefreshCw} from "lucide-react";
 import {ArticleModel} from "../../model/ArticleModel.ts";
 import {TooltipBox} from "../../Components/tooltip.tsx";

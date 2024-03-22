@@ -63,10 +63,8 @@ export function useArticle({feedId, type}: UseArticleProps) {
         });
         isLoading = false;
     }
-    console.log(data);
     const list = data ? data.flatMap(item => item || []) : [];
     const articles = [...list];
-    console.log(articles);
     const isEmpty = !isLoading && list.length === 0;
     const isReachingEnd = isEmpty || (data && data.length < PAGE_SIZE);
 

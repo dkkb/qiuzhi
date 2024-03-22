@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {formatDistanceToNow} from "date-fns";
 import classnames from "classnames";
-import {ArticleModel} from "../model/ArticleModel.ts";
-import {ArticleReadStatus} from "../constants/constants.ts";
-import {getFeedFavicon} from "../helpers/favicon.ts";
-import {useBearStore} from "../stores";
+import {ArticleModel} from "../../model/ArticleModel.ts";
+import {ArticleReadStatus} from "../../constants/constants.ts";
+import {getFeedFavicon} from "../../helpers/favicon.ts";
+import {useBearStore} from "../../stores";
 
 interface ArticleItemProps {
     article: ArticleModel;
