@@ -65,7 +65,7 @@ export const ItemView: FC<CardProps> = ({uuid, text, feed, index, isExpanded, to
                     e.stopPropagation();
                     store.setFeed(feed);
                     navigate(
-                        `${RouteConfig.LOCAL_FEED.replace(/:feedId/, feed.id)}?feedUrl=${feed.feed_url}`
+                        `${RouteConfig.LOCAL_FEED.replace(/:feedId/, feed.id)}?url=${feed.url}&type=${feed.type}`
                     );
                 }}
             >

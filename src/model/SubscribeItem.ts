@@ -1,7 +1,7 @@
 export enum SubscribeItemType {
-    FOLDER,
-    FEED,
-    PODCAST
+    FOLDER = 'folder',
+    FEED = 'feed',
+    PODCAST = 'podcast',
 }
 
 export interface SubscribeItem {
