@@ -7,7 +7,8 @@ import {Separator} from "../Components/separator.tsx";
 import {ReadingOptions} from "./ReadingOptions.tsx";
 import {AnimatePresence, motion} from "framer-motion";
 import {ScrollBox, ScrollBoxRefObject} from "../Components/ScrollBox.tsx";
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
+import xss, {getDefaultWhiteList} from "xss";
 
 interface ArticleDetailProps {
     article: ArticleModel;
@@ -15,13 +16,43 @@ interface ArticleDetailProps {
 }
 
 export const ArticleDetail = ({article, feed_title}: ArticleDetailProps) => {
+    const [pageContent, setPageContent] = useState("");
     const scrollBoxRef = useRef<ScrollBoxRefObject>(null);
+    const ico = getFeedFavicon(article.source_url!);
+    useEffect(() => {
+        let content = article.content.replace(/<a[^>]+>/gi, (a: string) => {
+            if (!/\starget\s*=/gi.test(a)) {
+                return a.replace(/^<a\s/, '<a target="_blank"');
+            }
 
-    const pageContent = "<h1>pageContent</h1>"
-    const ico = getFeedFavicon('https://www.zhihu.com/rss');
+            return a;
+        });
+        setPageContent(
+            xss(content, {
+                whiteList: {
+                    ...getDefaultWhiteList(),
+                    iframe: [],
+                    button: [],
+                },
+            })
+        );
+        // TODO: 我们在 list 里面使用的是缩略 desc，在选择后才去真正的获取 detail。
+        // article && dataAgent
+        //     .getArticleDetail(article.uuid, {
+        //         signal: controller.signal,
+        //     })
+        //     .then((res) => {
+        //         console.log("%c Line:102 🥓 res", "color:#33a5ff", res);
+        //         const { data } = res;
+        //     });
+        // return () => {
+        //     controller.abort();
+        // };
+    }, [article]);
+
     const renderItem = (item: string) => {
         return (
-            <span className="self-center h-20 leading-20 text-detail-paragraph">{item}</span>
+            <span className="self-center h-5 leading-5 text-detail-paragraph">{item}</span>
         )
     }
 
@@ -82,7 +113,7 @@ export const ArticleDetail = ({article, feed_title}: ArticleDetailProps) => {
                     </div>
                     <div className="text-sm text-[hsl(var(--text-color))] grid grid-cols-[auto_auto_1fr] gap-3">
                         <span className="flex items-center h-5 leading-5">
-                            <img src={ico} alt="" className="rounded"/>
+                            <img src={ico} alt="" className="rounded-full h-5"/>
                             {feed_title}
                         </span>
                         {article.author && renderItem(article.author)}
@@ -126,9 +157,9 @@ export const ArticleDetail = ({article, feed_title}: ArticleDetailProps) => {
                 >
                     <ScrollBox className="h-[calc(100vh_-_var(--app-toolbar-height))]" ref={scrollBoxRef}>
                         <div
-                            className="font-[var(--reading-font-body)] min-h-full m-auto sm:px-5 sm:max-w-xl lg:px-10 lg:max-w-5xl">
+                            className="font-[var(--reading-font-body)] min-h-full m-auto sm:px-5 sm:max-w-xl lg:px-16 lg:max-w-5xl">
                             {" "}
-                            <div className="relative px-20 py-6">
+                            <div className="relative px-18">
                                 {article.id ? renderDetail() : renderPlaceholder()}
                             </div>
                         </div>

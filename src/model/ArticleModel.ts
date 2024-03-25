@@ -6,6 +6,7 @@ export interface ArticleModel {
     image?: string
     author: string
     description: string
+    content: string
     publish_date: string
     read_status: ArticleReadStatus
     source_url?: string

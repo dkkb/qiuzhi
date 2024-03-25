@@ -21,16 +21,15 @@ export const ArticleListItem = ({article}: ArticleItemProps) => {
         setArticle: state.setArticle,
     }));
 
-    const updateCurrentArticle = (article: any) => {
+    const handleClick = async (_: React.MouseEvent) => {
         if (article.read_status === ArticleReadStatus.UNREAD) {
             setReadStatus(ArticleReadStatus.READ);
         }
+        store.markArticleAsRead(article.id);
+        store.setArticle(article);
     };
 
-    const handleClick = async (_: React.MouseEvent) => {
-        updateCurrentArticle(article);
-    };
-
+    // Don't know what for
     // useEffect(() => {
     //     setReadStatus(article.read_status);
     // }, [article.read_status]);

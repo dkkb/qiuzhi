@@ -1,6 +1,7 @@
 @import "./custom-theme.css";
 @import "./sidebar.css";
 @import "./custom-components.css";
+@import "./reading-style.css";
 
 * {
     box-sizing: border-box;

@@ -54,13 +54,17 @@ export function useArticle({feedId, type}: UseArticleProps) {
     let data: ArticleModel[] = [];
     let isLoading = true;
     if (feedId) {
-        json.rss.channel.item.forEach((item: any) => {
-            data.push({
-                status: ArticleReadStatus[item.status],
-                publish_date: new Date(Date.parse(item.publish_date)),
-                ...item,
-            })
-        });
+        // loop 5 times
+        for (let i = 0; i < 10; i++) {
+            json.rss.channel.item.forEach((item: any) => {
+                data.push({
+                    status: ArticleReadStatus[item.status],
+                    publish_date: new Date(Date.parse(item.publish_date)),
+                    content: item.description,
+                    ...item,
+                })
+            });
+        }
         isLoading = false;
     }
     const list = data ? data.flatMap(item => item || []) : [];
@@ -74,7 +78,6 @@ export function useArticle({feedId, type}: UseArticleProps) {
         mutate: null,
         size: null,
         setSize: null,
-        isEmpty,
         isReachingEnd,
         isToday: !!isToday,
         isAll: !!isAll,

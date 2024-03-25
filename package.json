@@ -39,6 +39,7 @@
     "swr": "^2.2.5",
     "tailwind-merge": "^2.2.1",
     "web-vitals": "^3.5.2",
+    "xss": "^1.0.15",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

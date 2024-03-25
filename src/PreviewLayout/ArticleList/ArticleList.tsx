@@ -67,8 +67,12 @@ export const ArticleList = ({isLoading, articles}: ArticleListProps) => {
             setPlaceholderCount(count);
         }
     }, []);
+    const listRef = useRef<HTMLDivElement>(null);
+
     return (
-        <div className={"w-1/5 max-w-[300px] min-w-[240px] shadow"} ref={containerRef}>
+        <div
+            className={"w-1/5 max-w-[400px] min-w-[300px] shadow shrink-0 basis-[var(--app-article-width)] border-r flex flex-col h-full"}
+            ref={containerRef}>
             <div
                 className="h-[var(--app-toolbar-height)] grid grid-cols-[auto_1fr] items-center justify-between border-b">
                 <div
@@ -109,7 +113,7 @@ export const ArticleList = ({isLoading, articles}: ArticleListProps) => {
                     </TooltipBox>
                 </div>
             </div>
-            <div>
+            <div className="relative flex-1 overflow-y-auto" ref={listRef}>
                 <ul className="m-0 grid gap-2 pt-2 pr-1 pb-1 pl-2">{renderList()}</ul>
                 <div className="pt-1">
                     {isLoading && (
